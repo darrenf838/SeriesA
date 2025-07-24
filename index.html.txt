@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration Form</title>
+</head>
+<body>
+  <h2>Enter Your Details</h2>
+  <form id="registrationForm">
+    <label for="fullName">Full Name:</label><br />
+    <input type="text" id="fullName" name="fullName" required /><br /><br />
+
+    <label for="email">Email:</label><br />
+    <input type="email" id="email" name="email" required /><br /><br />
+
+    <label for="phone">Your Cellphone Number:</label><br />
+    <input type="tel" id="phone" name="phone" required /><br /><br />
+
+    <label for="introducerName">Introducer's Name:</label><br />
+    <input type="text" id="introducerName" name="introducerName" required /><br /><br />
+
+    <label for="introducerPhone">Introducer's Cell Number:</label><br />
+    <input type="tel" id="introducerPhone" name="introducerPhone" required /><br /><br />
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('fullName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const introducerName = document.getElementById('introducerName').value.trim();
+      const introducerPhone = document.getElementById('introducerPhone').value.trim();
+      const result = document.getElementById('result');
+
+      const emailValid = email.includes('@');
+      const phoneValid = phone.length >= 10 && phone.length <= 13;
+      const introducerPhoneValid = introducerPhone.length >= 10 && introducerPhone.length <= 13;
+
+      if (!emailValid) {
+        result.textContent = '❌ Invalid email address.';
+        return;
+      }
+
+      if (!phoneValid) {
+        result.textContent = '❌ Your cellphone number must be 10–13 digits.';
+        return;
+      }
+
+      if (!introducerPhoneValid) {
+        result.textContent = '❌ Introducer\'s cellphone number must be 10–13 digits.';
+        return;
+      }
+
+      result.textContent = `✅ Thank you, ${name}. Your details and your introducer ${introducerName} have been received.`;
+    });
+  </script>
+</body>
+</html>
